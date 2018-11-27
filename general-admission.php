@@ -34,6 +34,9 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
       public function __construct() {
         //admin notices
         add_action('admin_notices', array($this, 'my_admin_notice'));
+
+        //Add general admission tab to woocommerce settings
+        add_filter( 'woocommerce_settings_tabs_array', array ($this, 'add_settings_tab'), 50 );
       }
 
       //print an admin notice
@@ -44,6 +47,15 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
          </div>
         <?php
       }
+      // add a settings tab
+      public function add_settings_tab($settings_tabs){
+        $settings_tabs['general_admission'] = __( 'General Admission', 'general-admission-for-woocommerce' );
+        return $settings_tabs;
+      }
+
+
+
+
     }
 
     $GLOBALS['wc_genadmission'] = new WC_GenAdmission();
