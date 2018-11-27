@@ -32,7 +32,17 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', ge
     // create the class
     class WC_GenAdmission {
       public function __construct() {
-        echo 'hello, world!';
+        //admin notices
+        add_action('admin_notices', array($this, 'my_admin_notice'));
+      }
+
+      //print an admin notice
+      public function my_admin_notice(){
+        ?>
+         <div class="notice notice-success is-dismissible">
+             <p><?php _e( 'Done!', 'sample-text-domain' ); ?></p>
+         </div>
+        <?php
       }
     }
 
