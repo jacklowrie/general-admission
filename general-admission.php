@@ -24,3 +24,18 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with General Admission. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
+// make sure Woocommerce is active
+if ( in_array( 'woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+
+  // make sure we're not conflicting with another Plugin
+  if ( ! class_exists('WC_GenAdmission') ) {
+    // create the class
+    class WC_GenAdmission {
+      public function __construct() {
+        echo 'hello, world!';
+      }
+    }
+
+    $GLOBALS['wc_genadmission'] = new WC_GenAdmission();
+  }
+}
